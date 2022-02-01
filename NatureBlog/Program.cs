@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using NatureBlog.DAL;
+using NatureBlog.Services;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var connString = builder.Configuration.GetConnectionString("Default");
+builder.Services.AddDbContext<BlogDbContext>( dbContextOptions => dbContextOptions .UseSqlServer(connString));
+builder.Services.AddScoped<IBlogPostService, BlogPostService>();
 
 var app = builder.Build();
 

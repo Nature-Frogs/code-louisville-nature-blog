@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{1787D6CC-CAEB-4FFB-B855-1B74F0BF1586}|Default">
+  <MonoDevelop.Ide.ItemProperties.NatureBlog.Web PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="NatureBlog/NatureBlog.Web.csproj">
+    <Files>
+      <File FileName="NatureBlog/NatureBlog.Web.csproj" Line="24" Column="11" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="NatureBlog" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
