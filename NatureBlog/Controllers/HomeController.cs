@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NatureBlog.Web.Models;
 using System.Diagnostics;
+using NatureBlog.Services;
 
 namespace NatureBlog.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBlogPostService _blogPostService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBlogPostService blogPostService)
         {
             _logger = logger;
+            _blogPostService = blogPostService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var posts = await _blogPostService.GetBlogPosts();
+            return View(posts);
         }
 
 
