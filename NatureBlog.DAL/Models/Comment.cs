@@ -8,6 +8,7 @@ namespace NatureBlog.DAL.Models
 {
     public class Comment
     {
+        public int Id { get; set; }
         public string CommenterName { get; set; }
         public DateTimeOffset DateTimePosted { get; set; }
         public string CommentBody { get; set; }
