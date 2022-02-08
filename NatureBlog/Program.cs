@@ -5,10 +5,22 @@ using NatureBlog.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+IConfigurationRoot configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+var cxString = configuration.GetConnectionString("SQLConnectionString");
+if (string.IsNullOrWhiteSpace(cxString))
+{
+    cxString = Environment.GetEnvironmentVariable("SQLConnectionString");
+}
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-var connectionStr =
-builder.Services.AddDbContext<BlogDatabaseContext>(options => options.UseSqlServer("server=localhost,1433;user=sa;database=FrogBlog;password=34r0TNhvgOde;"));
+
+builder.Services.AddDbContext<BlogDatabaseContext>(options => options.UseSqlServer(cxString));
 builder.Services.AddScoped<IBlogPostService, BlogPostService>();
 
 var app = builder.Build();

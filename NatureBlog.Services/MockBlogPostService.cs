@@ -4,7 +4,7 @@ namespace NatureBlog.Services;
 
 public class MockBlogPostService : IBlogPostService
 {
-    public Task<List<BlogPost>> GetBlogPosts()
+    public Task<List<BlogPost>> GetBlogPostsByDateDesc(int takeLimit = 5)
     {
         var blogPosts = new List<BlogPost>()
         {

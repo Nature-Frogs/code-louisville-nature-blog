@@ -18,7 +18,7 @@ namespace NatureBlog.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var posts = await _blogPostService.GetBlogPosts();
+            var posts = await _blogPostService.GetBlogPostsByDateDesc();
             return View(posts);
         }
 
