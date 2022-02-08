@@ -4,5 +4,5 @@ namespace NatureBlog.Services;
 
 public interface IBlogPostService
 {
-    Task<List<BlogPost>> GetBlogPostsByDateDesc(int takeLimit = 5)
+    Task<List<BlogPost>> GetBlogPostsByDateDesc(int takeLimit = 5);
 }
