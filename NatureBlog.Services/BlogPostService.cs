@@ -13,9 +13,11 @@ namespace NatureBlog.Services
             _db = context;
         }
         
-        public async Task<List<BlogPost>> GetBlogPosts()
+        public async Task<List<BlogPost>> GetBlogPostsByDateDesc(int takeLimit = 5)
         {
-            return await _db.BlogPosts.OrderBy(x => x.DateTime).ToListAsync();
+            return await _db.BlogPosts.OrderBy(x => x.DateTime)
+                .Take(takeLimit)
+                .ToListAsync();
         }
     }
 }
