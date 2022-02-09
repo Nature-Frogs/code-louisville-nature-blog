@@ -25,6 +25,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="AboutMe" asp-action="Index">About Me</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <li style="margin-left: auto">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="margin-left: auto; display: flex">
+                                <span class="nav-link text-dark"> Hello, @User.Identity.Name |</span> 
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

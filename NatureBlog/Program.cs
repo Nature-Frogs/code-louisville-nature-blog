@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using NatureBlog.DAL;
 using NatureBlog.DAL.Models;
 using NatureBlog.Services;
+using NatureBlog.Web;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BlogDatabaseContext>(options => options.UseSqlServer(cxString));
 builder.Services.AddScoped<IBlogPostService, BlogPostService>();
 
+builder.Services.AddAuthentication(AppConstants.COOKIE_AUTH_SCHEME_NAME)
+    .AddCookie(AppConstants.COOKIE_AUTH_SCHEME_NAME, options =>
+    {
+        options.Cookie.Name = AppConstants.COOKIE_AUTH_SCHEME_NAME;
+        options.LoginPath = "/account";
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(AppConstants.BLOG_ENTRY_POLICY_NAME, policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +52,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

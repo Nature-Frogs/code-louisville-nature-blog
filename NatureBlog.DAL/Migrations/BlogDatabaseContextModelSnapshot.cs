@@ -58,11 +58,16 @@ namespace NatureBlog.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("BlogPostId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
 
                     b.ToTable("Categories");
                 });
@@ -74,6 +79,9 @@ namespace NatureBlog.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("BlogPostId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CommentBody")
                         .IsRequired()
@@ -88,7 +96,30 @@ namespace NatureBlog.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BlogPostId");
+
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("NatureBlog.DAL.Models.Category", b =>
+                {
+                    b.HasOne("NatureBlog.DAL.Models.BlogPost", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("BlogPostId");
+                });
+
+            modelBuilder.Entity("NatureBlog.DAL.Models.Comment", b =>
+                {
+                    b.HasOne("NatureBlog.DAL.Models.BlogPost", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogPostId");
+                });
+
+            modelBuilder.Entity("NatureBlog.DAL.Models.BlogPost", b =>
+                {
+                    b.Navigation("Categories");
+
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
