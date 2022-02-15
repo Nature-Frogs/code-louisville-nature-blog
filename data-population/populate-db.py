@@ -29,12 +29,13 @@ conn = pyodbc.connect("DRIVER=" + driver
 d1 = datetime.strptime('1/1/2015 1:30 PM', '%m/%d/%Y %I:%M %p')
 d2 = datetime.strptime('1/1/2021 4:50 AM', '%m/%d/%Y %I:%M %p')
 f = open("robinson-crusoe", "r")
-lines = f.read().replace('\'', '').split("\n")
+lines = f.read().replace('\'', '').split("\n\n")
 cursor = conn.cursor()
 
 for line in lines:
     author = names.get_full_name()
-    title = line.split(" ")[int(len(line.split(" "))/2)]
+    title_index_start = int(len(line.split(" "))/2)
+    title = line.split(" ")[title_index_start] + " " +  line.split(" ")[title_index_start+1]
     content = str(line)
     date_time = str(random_date(d1, d2))
     cursor.execute("Insert into BlogPosts (Title, Content, DateTime, PostedBy) Values('%s', '%s', '%s', '%s' )"%(title, content, date_time, author))
