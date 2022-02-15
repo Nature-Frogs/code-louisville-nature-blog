@@ -16,9 +16,9 @@ namespace NatureBlog.Web.Controllers
             _blogPostService = blogPostService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var posts = await _blogPostService.GetBlogPostsByDateDesc();
+            var posts = await _blogPostService.GetBlogPostsByDateDesc(searchString: searchString);
             return View(posts);
         }
 

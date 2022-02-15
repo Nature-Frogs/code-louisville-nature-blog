@@ -1,5 +1,14 @@
 ﻿@model List<NatureBlog.DAL.Models.BlogPost>
 
+
+
+<form asp-controller="Home" asp-action="Index">
+    <p>
+        <input type="text" name="SearchString"/>
+        <input type="submit" value="Search"/>
+    </p>
+</form>
+
 <div class="row">
     <div class="leftcolumn">
         
@@ -9,7 +18,7 @@
             <h2>@post.Title</h2>
             <h5>@post.PostedBy</h5>
             <p>@post.DateTime</p>
-            <div class="fakeimg" style="height:200px;">Image</div>
+            <img src="https://picsum.photos/800/400?random=@post.DateTime.DayOfYear">
             <p>@post.Content</p>
         </div>
         }
@@ -17,7 +26,7 @@
     <div class="rightcolumn">
         <div class="card">
             <h2>About Me</h2>
-            <div class="fakeimg" style="height:100px;">Image</div>
+            <img src="https://picsum.photos/400/400?random=1">
             <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
         </div>
         <div class="card">

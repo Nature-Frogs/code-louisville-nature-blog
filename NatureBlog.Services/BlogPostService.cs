@@ -13,11 +13,21 @@ namespace NatureBlog.Services
             _db = context;
         }
         
-        public async Task<List<BlogPost>> GetBlogPostsByDateDesc(int takeLimit = 5)
+        public async Task<List<BlogPost>> GetBlogPostsByDateDesc(int takeLimit = 5, string searchString = "")
         {
-            return await _db.BlogPosts.OrderBy(x => x.DateTime)
-                .Take(takeLimit)
-                .ToListAsync();
+            var posts =  _db.BlogPosts.AsQueryable();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var splitString = searchString.Split(" ");
+                foreach (var word in splitString)
+                {
+                    posts = posts.Where(b => 
+                        b.Title.Contains(word) ||
+                        b.Content.Contains(word) ||
+                        b.PostedBy.Contains(word) );
+                }
+            }
+            return await posts.OrderBy(x => x.DateTime).Take(takeLimit).ToListAsync();
         }
     }
 }
