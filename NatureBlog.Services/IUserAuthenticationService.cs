@@ -8,6 +8,6 @@ namespace NatureBlog.Services
 {
     public interface IUserAuthenticationService
     {
-        public Task<bool> IsUserAuthentic(string userName, string password);
+        public Task<UserAuthenticationResult> RequestAuthenticatedUser(string userName, string password);
     }
 }

@@ -35,7 +35,7 @@ builder.Services.AddAuthentication(AppConstants.COOKIE_AUTH_SCHEME_NAME)
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(AppConstants.BLOG_ENTRY_POLICY_NAME, policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
+    options.AddPolicy(AppConstants.BLOG_ENTRY_POLICY_NAME, policy => policy.RequireClaim(ClaimTypes.Role, AppConstants.DEFAULT_ROLE));
 });
 
 var app = builder.Build();
