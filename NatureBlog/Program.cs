@@ -24,6 +24,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<BlogDatabaseContext>(options => options.UseSqlServer(cxString));
 builder.Services.AddScoped<IBlogPostService, BlogPostService>();
+builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 
 builder.Services.AddAuthentication(AppConstants.COOKIE_AUTH_SCHEME_NAME)
     .AddCookie(AppConstants.COOKIE_AUTH_SCHEME_NAME, options =>

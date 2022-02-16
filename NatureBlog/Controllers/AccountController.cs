@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using NatureBlog.Services;
 using NatureBlog.Web.Models;
 using System.Security.Claims;
 
@@ -7,6 +8,11 @@ namespace NatureBlog.Web.Controllers
 {
     public class AccountController : Controller
     {
+        private IUserAuthenticationService _authSvc;
+        public AccountController(IUserAuthenticationService authSvc)
+        {
+            _authSvc = authSvc;
+        }
         public IActionResult Index()
         {
             return View();
@@ -20,23 +26,27 @@ namespace NatureBlog.Web.Controllers
                 return View("Index", model);
             }
 
-            if(model.UserName == "admin" && model.Password == "password")
+            if(await _authSvc.IsUserAuthentic(model.UserName, model.Password))
             {
-                var claims = new List<Claim>
+                await MakeClaims();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        private async Task MakeClaims()
+        {
+            var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Role, "admin"),
                     new Claim(ClaimTypes.Name, "The Adminstrator")
                 };
 
-                var identity = new ClaimsIdentity(claims, AppConstants.COOKIE_AUTH_SCHEME_NAME);
-                var principal = new ClaimsPrincipal(identity);
+            var identity = new ClaimsIdentity(claims, AppConstants.COOKIE_AUTH_SCHEME_NAME);
+            var principal = new ClaimsPrincipal(identity);
 
-                await HttpContext.SignInAsync(AppConstants.COOKIE_AUTH_SCHEME_NAME, principal);
-
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View();
+            await HttpContext.SignInAsync(AppConstants.COOKIE_AUTH_SCHEME_NAME, principal);
         }
 
         public async Task<IActionResult> Logout()
