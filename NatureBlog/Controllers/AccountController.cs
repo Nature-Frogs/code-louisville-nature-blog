@@ -22,7 +22,7 @@ namespace NatureBlog.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if(ModelState.IsValid == false)
+            if (ModelState.IsValid == false)
             {
                 return View("Index", model);
             }
@@ -43,8 +43,11 @@ namespace NatureBlog.Web.Controllers
                 await HttpContext.SignInAsync(AppConstants.COOKIE_AUTH_SCHEME_NAME, principal);
                 return RedirectToAction("Index", "Home");
             }
-
-            return View();
+            else
+            {
+                ModelState.AddModelError("Invalid", "Invalid Username / Password.");
+                return View("Index", model);
+            }
         }
 
         public async Task<IActionResult> Logout()
