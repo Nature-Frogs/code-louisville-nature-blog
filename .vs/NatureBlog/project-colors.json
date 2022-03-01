@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "1787d6cc-caeb-4ffb-b855-1b74f0bf1586": {
+      "ProjectGuid": "1787d6cc-caeb-4ffb-b855-1b74f0bf1586",
+      "DisplayName": "NatureBlog.Web",
+      "ColorIndex": 0
+    },
+    "d7876a03-bc7e-4ee6-871d-e57db0e6cfa4": {
+      "ProjectGuid": "d7876a03-bc7e-4ee6-871d-e57db0e6cfa4",
+      "DisplayName": "NatureBlog.DAL",
+      "ColorIndex": 1
+    },
+    "1f06ca9c-7923-40f9-984c-2b9e78e7c85c": {
+      "ProjectGuid": "1f06ca9c-7923-40f9-984c-2b9e78e7c85c",
+      "DisplayName": "NatureBlog.Services",
+      "ColorIndex": 2
+    },
+    "3ca9132e-7549-4911-9fcc-c0c3f031f712": {
+      "ProjectGuid": "3ca9132e-7549-4911-9fcc-c0c3f031f712",
+      "DisplayName": "NatureBlog.Tests",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 4
+}

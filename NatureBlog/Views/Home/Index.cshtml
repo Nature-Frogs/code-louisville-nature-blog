@@ -19,7 +19,7 @@
             <h5>@post.PostedBy</h5>
             <p>@post.DateTime</p>
             <img src="https://picsum.photos/800/400?random=@post.DateTime.DayOfYear">
-            <p>@post.Content</p>
+            <p>@Html.Raw(post.Content)</p>
         </div>
         }
     </div>

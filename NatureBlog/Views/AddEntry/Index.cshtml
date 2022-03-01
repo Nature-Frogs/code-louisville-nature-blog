@@ -1,1 +1,19 @@
-﻿<h1>ADD ENTRY</h1>
+﻿@model NatureBlog.Web.Models.BlogEntryViewModel
+
+<h1>ADD ENTRY</h1>
+
+
+<form asp-controller="AddEntry" asp-action="Save">
+    <label>Title</label> <span class="text-danger" asp-validation-for="Title"></span>
+    <input type="text" asp-for="Title" class="form-control" />
+    <label>Content</label> <span class="text-danger" asp-validation-for="Content"></span>
+    <textarea asp-for="Content">Next, use our Get Started docs to setup Tiny!</textarea>
+    <input type="submit" name="Save" value="Save" class="form-control" />
+</form>
+
+
+@section Scripts
+{
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>tinymce.init({selector:'textarea'});</script>
+}
