@@ -60,6 +60,6 @@ for line in lines:
     title = line.split(" ")[title_index_start] + " " +  line.split(" ")[title_index_start+1]
     content = str(line)
     date_time = str(random_date(d1, d2))
-    cursor.execute("Insert into BlogPosts (Title, Content, DateTime, UserId) Values('%s', '%s', '%s', '%i' )"%(title, content, date_time, 1))
+    cursor.execute("Insert into BlogPosts (Title, Content, DateTime, UserId) Values('%s', '%s', '%s', '%i' )"%(title, content, date_time, 0))
 conn.commit()
 cursor.close()
